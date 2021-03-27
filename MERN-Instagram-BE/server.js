@@ -14,5 +14,11 @@ app.use(cors())
 // DB config
 
 // API routes
+app.get('/', ( (req,res) => {
+    res.status(200).send('Helloo')
+}))
 
 // Listeners
+app.listen(PORT, () => {
+    console.log(`Server is listening at PORT: ${PORT}`)
+})
