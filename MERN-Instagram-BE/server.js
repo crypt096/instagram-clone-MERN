@@ -15,6 +15,15 @@ app.use(cors())
 
 // DB config
 const connection_url = process.env.MONGO_URL;
+mongoose.connect(connection_url, {
+    useCreateIndex: true,
+    useUnifiedTopology:true,
+    useNewUrlParser: true,
+})
+
+mongoose.connection.once('open', () => {
+    console.log('MongoDB has been successfuly connected!')
+})
 
 // API routes
 app.get('/', ( (req,res) => {
