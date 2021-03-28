@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import Pusher from 'pusher';
 import dotenv from 'dotenv';
 
+import dbModel from './dbModel.js';
+
 // App config
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -29,6 +31,22 @@ mongoose.connection.once('open', () => {
 app.get('/', ( (req,res) => {
     res.status(200).send('Helloo')
 }))
+
+app.post('/upload',(req,res) => {
+    const body = req.body;
+
+    dbModel.create(body, (err, data) => {
+        if(err) {
+            res.status(500).send(err);
+        }else{
+            res.status(201).send(data);
+        }
+    })
+})
+
+app.get('/sync', (req,res) => {
+    
+})
 
 // Listeners
 app.listen(PORT, () => {
